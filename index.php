@@ -23,6 +23,7 @@
         var player2=null;
         var score=0;
         var direction='left';
+        var pause=false;
 
         function start(){
              cv  =document.getElementById('mycanvas');
@@ -45,7 +46,15 @@
 
             player2.c=rbgaRand();
             player2.dibujar(ctx);
-            update();
+
+            if(pause){
+                ctx.fillStyle="rgba(0,0,0,0.5)";                
+                ctx.fillRect(0,0,500,500);
+                ctx.fillStyle="black";                
+                ctx.fillText("P A U S E",230,230);
+            }else{
+                update();
+            }
         }
         function update(){
             if(direction=='rigth'){
@@ -121,6 +130,11 @@
         //down
         if(e.keyCode == 68 || e.keyCode == 39){
             direction='rigth';
+        }
+
+        //down
+        if(e.keyCode == 32){
+            pause=(pause)?false:true;
         }
 
         })
